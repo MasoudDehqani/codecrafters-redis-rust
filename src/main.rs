@@ -11,11 +11,11 @@ fn main() {
 
     for stream in listener.incoming() {
         match stream {
-            Ok(mut stream) => {
+            Ok(mut stream) => loop {
                 let mut buffer = [0_u8; 512];
                 stream.read(&mut buffer).unwrap();
                 stream.write_all(b"+PONG\r\n").unwrap();
-            }
+            },
             Err(e) => {
                 println!("error: {}", e);
             }
